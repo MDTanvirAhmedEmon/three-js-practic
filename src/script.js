@@ -15,7 +15,7 @@ const material = new THREE.MeshBasicMaterial({ color: 0xff0000 })
 const mesh = new THREE.Mesh(geometry, material)
 scene.add(mesh)
 
-mesh.position.x = 3
+// mesh.position.x = 3
 // mesh.rotation.y = 2
 
 // mesh.scale.x = 1
@@ -35,7 +35,7 @@ console.log(mesh.position.length());
  * Camera
  */
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height)
-camera.position.z = 5
+camera.position.z = 3
 
 scene.add(camera)
 console.log(mesh.position.distanceTo(camera.position))
@@ -55,16 +55,31 @@ let time = new Date()
 
 const clock = new THREE.Clock()
 
+const cursor = {
+    x: 0,
+    y: 0
+}
+
+window.addEventListener('mousemove', (event) => {
+    cursor.x = event.clientX / sizes.width - 0.5
+    cursor.y =  - (event.clientY / sizes.height - 0.5)
+    
+})
+
 const tick = () => {
-    const currentTime = new Date();
-    const deltaTime = currentTime - time;
-    time = currentTime
-    // console.log((deltaTime /20));
-    const elapsedTime = clock.getElapsedTime()
-    console.log(elapsedTime);
-    console.log(Math.sin(elapsedTime));
+    // const currentTime = new Date();
+    // const deltaTime = currentTime - time;
+    // time = currentTime
+    // // console.log((deltaTime /20));
+    // const elapsedTime = clock.getElapsedTime()
+    // console.log(elapsedTime);
+    // console.log(Math.sin(elapsedTime));
     console.log('run');
-    mesh.rotation.x = Math.sin(elapsedTime)
+    console.log('x',cursor.x);
+    console.log('y',cursor.y);
+    camera.position.x = cursor.x
+    camera.position.y = cursor.y
+    // mesh.rotation.x = Math.sin(elapsedTime)
     renderer.render(scene, camera)
     window.requestAnimationFrame(tick);
 }
