@@ -62,8 +62,8 @@ const cursor = {
 
 window.addEventListener('mousemove', (event) => {
     cursor.x = event.clientX / sizes.width - 0.5
-    cursor.y =  - (event.clientY / sizes.height - 0.5)
-    
+    cursor.y = - (event.clientY / sizes.height - 0.5)
+
 })
 
 const tick = () => {
@@ -75,10 +75,14 @@ const tick = () => {
     // console.log(elapsedTime);
     // console.log(Math.sin(elapsedTime));
     console.log('run');
-    console.log('x',cursor.x);
-    console.log('y',cursor.y);
-    camera.position.x = cursor.x
-    camera.position.y = cursor.y
+    console.log('x', cursor.x);
+    console.log('x sin', Math.sin(cursor.x));
+    console.log('x cos', Math.cos(cursor.x));
+    // console.log('y', cursor.y);
+    camera.position.x = Math.sin(cursor.x) * 3
+    // camera.position.y = cursor.y 
+    camera.position.z = Math.cos(cursor.x) * 3
+    camera.lookAt(mesh.position)
     // mesh.rotation.x = Math.sin(elapsedTime)
     renderer.render(scene, camera)
     window.requestAnimationFrame(tick);
