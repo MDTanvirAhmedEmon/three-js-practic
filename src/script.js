@@ -107,4 +107,6 @@ const tick = () => {
 
 tick();
 renderer.setSize(sizes.width, sizes.height)
+// renderer.setPixelRatio(window.devicePixelRatio)
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 renderer.render(scene, camera)
