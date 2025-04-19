@@ -1,11 +1,12 @@
 import * as THREE from 'three'
-
+import { OrbitControls } from 'three/examples/jsm/Addons.js';
+// import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
 
 // Scene
 const scene = new THREE.Scene()
-
+console.log('controls', OrbitControls);
 /**
  * Objects
  */
@@ -66,6 +67,9 @@ window.addEventListener('mousemove', (event) => {
 
 })
 
+const controls = new OrbitControls(camera, canvas)
+controls.enableDamping = true;
+
 const tick = () => {
     // const currentTime = new Date();
     // const deltaTime = currentTime - time;
@@ -74,17 +78,18 @@ const tick = () => {
     // const elapsedTime = clock.getElapsedTime()
     // console.log(elapsedTime);
     // console.log(Math.sin(elapsedTime));
-    console.log('run');
-    console.log('x', cursor.x);
-    console.log('x sin', Math.sin(cursor.x));
-    console.log('x cos', Math.cos(cursor.x));
+    // console.log('run');
+    // console.log('x', cursor.x);
+    // console.log('x sin', Math.sin(cursor.x));
+    // console.log('x cos', Math.cos(cursor.x));
     // console.log('y', cursor.y);
-    camera.position.x = Math.sin(cursor.x * 6) * 3
-    // camera.position.y = cursor.y 
-    camera.position.z = Math.cos(cursor.x * 6) * 3
-    camera.position.y = cursor.y * 5
-    camera.lookAt(mesh.position)
+    // camera.position.x = Math.sin(cursor.x * 6) * 3
+    // // camera.position.y = cursor.y 
+    // camera.position.z = Math.cos(cursor.x * 6) * 3
+    // camera.position.y = cursor.y * 5
+    // camera.lookAt(mesh.position)
     // mesh.rotation.x = Math.sin(elapsedTime)
+    controls.update();
     renderer.render(scene, camera)
     window.requestAnimationFrame(tick);
 }
