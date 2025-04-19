@@ -27,8 +27,8 @@ scene.add(mesh)
  * Sizes
  */
 const sizes = {
-    width: 800,
-    height: 600
+    width: window.innerWidth,
+    height: window.innerHeight
 }
 console.log(mesh.position.length())
 console.log(mesh.position.length());
@@ -67,8 +67,8 @@ window.addEventListener('mousemove', (event) => {
 
 })
 
-const controls = new OrbitControls(camera, canvas)
-controls.enableDamping = true;
+// const controls = new OrbitControls(camera, canvas)
+// controls.enableDamping = true;
 
 const tick = () => {
     // const currentTime = new Date();
@@ -83,13 +83,13 @@ const tick = () => {
     // console.log('x sin', Math.sin(cursor.x));
     // console.log('x cos', Math.cos(cursor.x));
     // console.log('y', cursor.y);
-    // camera.position.x = Math.sin(cursor.x * 6) * 3
+    camera.position.x = Math.sin(cursor.x * 6) * 3
     // // camera.position.y = cursor.y 
-    // camera.position.z = Math.cos(cursor.x * 6) * 3
-    // camera.position.y = cursor.y * 5
-    // camera.lookAt(mesh.position)
+    camera.position.z = Math.cos(cursor.x * 6) * 3
+    camera.position.y = cursor.y * 5
+    camera.lookAt(mesh.position)
     // mesh.rotation.x = Math.sin(elapsedTime)
-    controls.update();
+    // controls.update();
     renderer.render(scene, camera)
     window.requestAnimationFrame(tick);
 }
