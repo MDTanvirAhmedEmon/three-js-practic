@@ -67,6 +67,17 @@ window.addEventListener('mousemove', (event) => {
 
 })
 
+// update canvas size
+window.addEventListener('resize', () => {
+    sizes.width = window.innerWidth
+    sizes.height = window.innerHeight
+
+    camera.aspect = sizes.width / sizes.height
+    camera.updateProjectionMatrix();
+
+    renderer.setSize(sizes.width, sizes.height)
+})
+
 // const controls = new OrbitControls(camera, canvas)
 // controls.enableDamping = true;
 
