@@ -11,8 +11,19 @@ console.log('controls', OrbitControls);
  * Objects
  */
 
-const geometry = new THREE.BoxGeometry(1, 1, 1)
-const material = new THREE.MeshBasicMaterial({ color: 0xff0000 })
+// const geometry = new THREE.BoxGeometry(1, 1, 1)
+const material = new THREE.MeshBasicMaterial({ color: 0xff0000, wireframe: true })
+
+const geometry = new THREE.BufferGeometry();
+const vertices = new Float32Array([
+    0, 0, 0,
+    0, 1, 0,
+    1, 0, 0,
+])
+
+const positionAttribute = new THREE.BufferAttribute(vertices, 3)
+geometry.setAttribute('position', positionAttribute)
+
 const mesh = new THREE.Mesh(geometry, material)
 scene.add(mesh)
 
@@ -42,8 +53,8 @@ scene.add(camera)
 console.log(mesh.position.distanceTo(camera.position))
 console.log(mesh.position.distanceTo(camera.position));
 console.log(mesh.position.normalize())
-const axis = new THREE.AxesHelper(3)
-scene.add(axis)
+// const axis = new THREE.AxesHelper(3)
+// scene.add(axis)
 
 /**
  * Renderer
@@ -52,9 +63,9 @@ const renderer = new THREE.WebGLRenderer({
     canvas: canvas
 })
 
-let time = new Date()
+// let time = new Date()
 
-const clock = new THREE.Clock()
+// const clock = new THREE.Clock()
 
 const cursor = {
     x: 0,
@@ -78,8 +89,8 @@ window.addEventListener('resize', () => {
     renderer.setSize(sizes.width, sizes.height)
 })
 
-// const controls = new OrbitControls(camera, canvas)
-// controls.enableDamping = true;
+const controls = new OrbitControls(camera, canvas)
+controls.enableDamping = true;
 
 const tick = () => {
     // const currentTime = new Date();
@@ -94,13 +105,13 @@ const tick = () => {
     // console.log('x sin', Math.sin(cursor.x));
     // console.log('x cos', Math.cos(cursor.x));
     // console.log('y', cursor.y);
-    camera.position.x = Math.sin(cursor.x * 6) * 3
-    // // camera.position.y = cursor.y 
-    camera.position.z = Math.cos(cursor.x * 6) * 3
-    camera.position.y = cursor.y * 5
-    camera.lookAt(mesh.position)
+    // camera.position.x = Math.sin(cursor.x * 6) * 3
+    // // // camera.position.y = cursor.y 
+    // camera.position.z = Math.cos(cursor.x * 6) * 3
+    // camera.position.y = cursor.y * 5
+    // camera.lookAt(mesh.position)
     // mesh.rotation.x = Math.sin(elapsedTime)
-    // controls.update();
+    controls.update();
     renderer.render(scene, camera)
     window.requestAnimationFrame(tick);
 }
